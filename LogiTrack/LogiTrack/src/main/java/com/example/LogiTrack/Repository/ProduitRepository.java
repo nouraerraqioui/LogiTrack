@@ -1,0 +1,21 @@
+package com.example.LogiTrack.Repository;
+
+import com.example.LogiTrack.Model.Produit;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+
+import java.util.List;
+
+public interface ProduitRepository extends JpaRepository<Produit,Long> {
+
+    List<Produit> findByCategorie(String categorie);
+
+    List<Produit> findByPrixLessThan(double prix);
+
+
+    @Query("SELECT p FROM Produit p WHERE p.quantiteStock < 5")
+    List<Produit> lowStock();
+
+
+}
